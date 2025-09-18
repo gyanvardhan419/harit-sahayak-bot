@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          hover: "hsl(var(--primary-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -38,6 +39,7 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          hover: "hsl(var(--accent-hover))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -46,6 +48,12 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        nature: {
+          dark: "hsl(var(--nature-dark))",
+          medium: "hsl(var(--nature-medium))",
+          light: "hsl(var(--nature-light))",
+          bright: "hsl(var(--nature-bright))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -80,10 +88,63 @@ export default {
             height: "0",
           },
         },
+        "chatBubbleIn": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(20px) scale(0.9)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0) scale(1)",
+          },
+        },
+        "typing": {
+          "0%, 60%, 100%": {
+            transform: "translateY(0)",
+          },
+          "30%": {
+            transform: "translateY(-10px)",
+          },
+        },
+        "fadeIn": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "slideInLeft": {
+          "0%": {
+            opacity: "0",
+            transform: "translateX(-30px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateX(0)",
+          },
+        },
+        "pulse-green": {
+          "0%, 100%": {
+            opacity: "1",
+            boxShadow: "0 0 0 0 hsl(var(--nature-bright) / 0.7)",
+          },
+          "70%": {
+            opacity: "0.8",
+            boxShadow: "0 0 0 10px hsl(var(--nature-bright) / 0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "chat-bubble-in": "chatBubbleIn 0.5s ease-out",
+        "typing": "typing 1.5s ease-in-out infinite",
+        "fade-in": "fadeIn 0.6s ease-out",
+        "slide-in-left": "slideInLeft 0.5s ease-out",
+        "pulse-green": "pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },

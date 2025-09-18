@@ -1,12 +1,66 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import CategorySelection from "@/components/CategorySelection";
+import ChatBot from "@/components/ChatBot";
+
+interface FarmingData {
+  state: string;
+  landSize: string;
+  soilType: string;
+  climate: string;
+  season: string;
+}
+
+type AppState = 'hero' | 'categories' | 'chat';
 
 const Index = () => {
+  const [currentState, setCurrentState] = useState<AppState>('hero');
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [farmingData, setFarmingData] = useState<FarmingData | null>(null);
+
+  const handleGetStarted = () => {
+    setCurrentState('categories');
+  };
+
+  const handleCategoriesComplete = (data: FarmingData) => {
+    setFarmingData(data);
+    setCurrentState('chat');
+  };
+
+  const handleBackToCategories = () => {
+    setCurrentState('categories');
+  };
+
+  const renderCurrentView = () => {
+    switch (currentState) {
+      case 'hero':
+        return <Hero onGetStarted={handleGetStarted} />;
+      
+      case 'categories':
+        return <CategorySelection onComplete={handleCategoriesComplete} />;
+      
+      case 'chat':
+        return farmingData && (
+          <ChatBot 
+            farmingData={farmingData}
+            selectedLanguage={selectedLanguage}
+            onBack={handleBackToCategories}
+          />
+        );
+      
+      default:
+        return <Hero onGetStarted={handleGetStarted} />;
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header 
+        selectedLanguage={selectedLanguage}
+        onLanguageChange={setSelectedLanguage}
+      />
+      {renderCurrentView()}
     </div>
   );
 };
