@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import CategorySelection from "@/components/CategorySelection";
@@ -16,8 +17,8 @@ type AppState = 'hero' | 'categories' | 'chat';
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('hero');
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [farmingData, setFarmingData] = useState<FarmingData | null>(null);
+  const { currentLanguage, setCurrentLanguage } = useTranslation();
 
   const handleGetStarted = () => {
     setCurrentState('categories');
@@ -44,7 +45,7 @@ const Index = () => {
         return farmingData && (
           <ChatBot 
             farmingData={farmingData}
-            selectedLanguage={selectedLanguage}
+            selectedLanguage={currentLanguage}
             onBack={handleBackToCategories}
           />
         );
@@ -57,8 +58,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header 
-        selectedLanguage={selectedLanguage}
-        onLanguageChange={setSelectedLanguage}
+        selectedLanguage={currentLanguage}
+        onLanguageChange={setCurrentLanguage}
       />
       {renderCurrentView()}
     </div>

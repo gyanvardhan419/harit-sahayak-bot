@@ -1,6 +1,7 @@
 import { Globe, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const languages = [
   { code: "en", name: "English", native: "English" },
@@ -26,6 +27,8 @@ interface HeaderProps {
 }
 
 const Header = ({ selectedLanguage, onLanguageChange }: HeaderProps) => {
+  const { t } = useTranslation();
+  
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -43,7 +46,7 @@ const Header = ({ selectedLanguage, onLanguageChange }: HeaderProps) => {
             <SelectTrigger className="w-[180px]">
               <div className="flex items-center space-x-2">
                 <Globe className="w-4 h-4" />
-                <SelectValue placeholder="Select Language" />
+                <SelectValue placeholder={t('selectLanguage')} />
               </div>
             </SelectTrigger>
             <SelectContent>

@@ -1,5 +1,6 @@
 import { ArrowRight, Cpu, Leaf, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
 import heroImage from "@/assets/hero-farming.jpg";
 
 interface HeroProps {
@@ -7,6 +8,8 @@ interface HeroProps {
 }
 
 const Hero = ({ onGetStarted }: HeroProps) => {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -24,16 +27,11 @@ const Hero = ({ onGetStarted }: HeroProps) => {
         <div className="max-w-3xl">
           <div className="animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              AI-Powered
-              <br />
-              <span className="gradient-accent bg-clip-text text-transparent">
-                Farming Assistant
-              </span>
+              {t('heroTitle')}
             </h1>
             
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Get personalized farming recommendations based on your region, soil type, 
-              climate conditions, and growing seasons. Available in 15+ Indian languages.
+              {t('heroSubtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -42,7 +40,7 @@ const Hero = ({ onGetStarted }: HeroProps) => {
                 className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-glow transition-smooth text-lg px-8 py-4"
                 onClick={onGetStarted}
               >
-                Start Farming Assistant
+                {t('getStarted')}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               

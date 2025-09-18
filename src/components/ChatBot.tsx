@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Send, Bot, User, Leaf, ArrowLeft } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -29,6 +30,7 @@ interface ChatBotProps {
 }
 
 const ChatBot = ({ farmingData, selectedLanguage, onBack }: ChatBotProps) => {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -47,7 +49,7 @@ const ChatBot = ({ farmingData, selectedLanguage, onBack }: ChatBotProps) => {
     const welcomeMessage = {
       id: "welcome",
       type: 'bot' as const,
-      content: `Hello! I'm your AI farming assistant. Based on your details - ${farmingData.state}, ${farmingData.landSize} farm with ${farmingData.soilType}, ${farmingData.climate} climate for ${farmingData.season} season - I'm ready to help with crop recommendations, farming techniques, pest management, and more. What would you like to know?`,
+      content: `${t('chatTitle')}! Based on your details - ${farmingData.state}, ${farmingData.landSize} farm with ${farmingData.soilType}, ${farmingData.climate} climate for ${farmingData.season} season - I'm ready to help with crop recommendations, farming techniques, pest management, and more. What would you like to know?`,
       timestamp: new Date()
     };
     
@@ -137,11 +139,11 @@ const ChatBot = ({ farmingData, selectedLanguage, onBack }: ChatBotProps) => {
         <div className="flex items-center mb-6">
           <Button variant="ghost" onClick={onBack} className="mr-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Setup
+            {t('backToForm')}
           </Button>
           <div className="flex items-center space-x-2">
             <Leaf className="w-6 h-6 text-primary" />
-            <h1 className="text-2xl font-bold">AI Farm Assistant</h1>
+            <h1 className="text-2xl font-bold">{t('chatTitle')}</h1>
           </div>
         </div>
 
@@ -228,7 +230,7 @@ const ChatBot = ({ farmingData, selectedLanguage, onBack }: ChatBotProps) => {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me anything about farming..."
+                placeholder={t('chatPlaceholder')}
                 className="flex-1"
               />
               <Button onClick={handleSendMessage} disabled={!inputMessage.trim()}>
